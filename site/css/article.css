@@ -1,0 +1,89 @@
+body { background: var(--paper); color: var(--ink); }
+
+.article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.article h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 36px;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px;
+}
+
+.article h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  margin: 40px 0 12px;
+}
+
+.article p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+.article .lede {
+  font-size: 18px;
+  color: var(--ink-soft);
+}
+
+.article ul {
+  margin: 0 0 16px;
+  padding-left: 22px;
+}
+
+.article li {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 8px;
+  font-size: 14px;
+}
+
+.article th, .article td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.article th {
+  font-weight: 700;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.article .note {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.article code {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 14px;
+}
+
+.article a {
+  color: var(--blue);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.article .back {
+  margin-top: 40px;
+}

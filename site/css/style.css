@@ -1,0 +1,492 @@
+:root {
+  --paper: #F5F1E8;
+  --card: #FAF7F0;
+  --ink: #1C1B18;
+  --ink-soft: #5E5A50;
+  --line: #D8D1C2;
+  --input-border: #C9C1AF;
+  --map-bg: #ECE6D8;
+  --blue: #2F5D8C;
+  --orange: #B4560F;
+  --orange-mid: #E5A56B;
+  --no-data: #E4DED0;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Hanken Grotesk", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+h1, h2 { font-family: var(--font-display); margin: 0; }
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 560px;
+}
+
+/* ---------- top bar ---------- */
+.topbar {
+  flex-shrink: 0;
+  height: 64px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.brand-sub {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.topnav {
+  display: flex;
+  gap: 32px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.topnav a { color: var(--ink); text-decoration: none; }
+.topnav a:hover { color: var(--orange); }
+
+/* ---------- layout ---------- */
+.layout {
+  flex-grow: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr) 400px;
+}
+
+/* ---------- left rail ---------- */
+.rail {
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-right: 1px solid var(--line);
+}
+
+.rail-intro { display: flex; flex-direction: column; gap: 10px; }
+
+.rail-intro h1 {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.rail-intro p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.rail-section { display: flex; flex-direction: column; gap: 8px; }
+
+.rail-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.rail-note {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.button-group { display: grid; gap: 8px; }
+.button-group.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* First layer button ("Esfuerzo", the default) spans the full row; the other four form 2x2. */
+#layer-buttons > button:first-child { grid-column: 1 / -1; }
+
+.toggle-btn {
+  height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--input-border);
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.toggle-btn.active {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 600;
+}
+
+.btn-outline {
+  height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--ink);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-solid {
+  height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--ink);
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* legend */
+.legend-grid-wrap { display: flex; gap: 12px; align-items: flex-end; }
+.legend-axis-y { width: 14px; height: 132px; display: flex; align-items: center; justify-content: center; }
+.legend-axis-y span { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 12px; color: var(--ink-soft); white-space: nowrap; }
+.legend-grid-col { display: flex; flex-direction: column; gap: 6px; }
+.legend-grid { display: grid; grid-template-columns: repeat(3, 40px); grid-auto-rows: 40px; gap: 2px; }
+.legend-grid > div { border-radius: 3px; }
+.legend-axis-x { font-size: 12px; color: var(--ink-soft); }
+
+.legend-strip-wrap { display: flex; flex-direction: column; gap: 6px; }
+.legend-strip { display: flex; gap: 2px; }
+.legend-strip > div { flex-grow: 1; height: 28px; border-radius: 3px; }
+.legend-strip-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-soft); }
+
+/* ---------- map ---------- */
+.map-wrap {
+  position: relative;
+  overflow: hidden;
+  background: var(--map-bg);
+}
+
+#map { width: 100%; height: 100%; display: block; }
+
+.area-path { stroke: var(--paper); stroke-width: 2px; cursor: pointer; transition: opacity 0.1s ease; }
+.area-path:hover { opacity: 0.82; }
+.area-path.selected { stroke: var(--ink); stroke-width: 3.5px; }
+.area-path.no-data { fill: var(--no-data); }
+.area-label { font-size: 11px; font-weight: 600; fill: var(--ink); pointer-events: none; font-family: var(--font-body); }
+
+#tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transform: translate(-50%, -110%);
+  white-space: nowrap;
+  z-index: 5;
+}
+
+.search-box { position: absolute; left: 24px; top: 24px; display: flex; z-index: 6; }
+
+#search-input {
+  box-sizing: border-box;
+  width: 230px;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--input-border);
+  border-right: 0;
+  border-radius: 8px 0 0 8px;
+  background: var(--card);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 14px;
+}
+
+#search-btn {
+  height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--ink);
+  border-radius: 0 8px 8px 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.search-results {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 274px;
+  background: var(--card);
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.search-results button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 14px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.search-results button:last-child { border-bottom: 0; }
+.search-results button:hover { background: var(--paper); }
+.search-results .share { color: var(--ink-soft); }
+
+.map-breadcrumb { position: absolute; left: 24px; top: 80px; display: flex; align-items: center; gap: 4px; font-size: 14px; z-index: 4; }
+.map-breadcrumb .crumb-sep { color: var(--ink-soft); }
+
+.crumb {
+  font: inherit;
+  color: var(--blue);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.crumb:disabled { color: var(--ink); cursor: default; }
+
+.map-hint { position: absolute; left: 24px; bottom: 140px; font-size: 13px; color: var(--ink-soft); z-index: 4; }
+
+.timeline-bar {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  z-index: 4;
+}
+/* When the map column is narrow the "Comparar" button drops to its own row instead of squeezing
+   the slider to nothing. The map measures the bar's real height (map.js), so a taller bar never
+   covers geography. */
+#compare-btn { margin-left: auto; }
+
+.play-btn {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 22px;
+  border: 0;
+  background: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.year-slider-col { flex: 1 1 200px; min-width: 200px; display: flex; flex-direction: column; }
+
+#year-slider { width: 100%; height: 44px; margin: 0; accent-color: var(--orange); }
+
+/* Labels are absolutely positioned at their true place along the track (main.js renderTicks). */
+.year-ticks { position: relative; height: 18px; font-size: 12px; line-height: 18px; color: var(--ink-soft); }
+.year-ticks .tick { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.year-ticks .tick-first { transform: none; left: 0 !important; }
+.year-ticks .tick-last { transform: translateX(-100%); left: 100% !important; }
+/* Always occupies its line (even when empty) so the bar's height never changes with the
+   year - a taller bar would cover map area the projection reserved (MAP_MARGIN in map.js). */
+.year-proj-note { height: 16px; line-height: 16px; margin-top: 2px; font-size: 12px; font-style: italic; color: var(--ink-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.year-readout {
+  flex-shrink: 0;
+  width: 90px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- right panel ---------- */
+.panel {
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-left: 1px solid var(--line);
+  background: var(--card);
+}
+
+.placeholder-text { color: var(--ink-soft); font-size: 14px; }
+
+.panel-kicker {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 4px;
+}
+
+.panel-title {
+  font-weight: 600;
+  font-size: 30px;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.panel-note { margin: 8px 0 0; font-size: 13px; line-height: 1.4; color: var(--ink-soft); }
+
+.value-rows { display: flex; flex-direction: column; }
+
+.value-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+
+.value-row:last-child { border-bottom: 1px solid var(--line); }
+
+.value-row-label { display: flex; flex-direction: column; gap: 2px; }
+.value-row-label .name { font-size: 13px; color: var(--ink-soft); }
+.value-row-label .src { font-size: 11px; color: var(--ink-soft); }
+
+.value-row-amount { text-align: right; display: flex; flex-direction: column; }
+.value-row-amount .amount { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; }
+.value-row-amount .amount.income { color: var(--blue); }
+.value-row-amount .amount.price { color: var(--orange); }
+.value-row-amount .delta { font-size: 12px; color: var(--ink-soft); }
+
+.effort-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+
+.effort-card {
+  box-sizing: border-box;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.effort-card .label { font-size: 13px; color: var(--line); }
+.effort-card .big { font-family: var(--font-display); font-size: 34px; line-height: 1.05; font-weight: 600; }
+.effort-card .sub { font-size: 12px; line-height: 1.35; color: var(--line); }
+
+.effort-card .m2-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+.effort-card .m2-row .m2-value { font-weight: 700; }
+
+.effort-card input[type="range"] {
+  width: 100%;
+  height: 44px;
+  margin: 0;
+  accent-color: var(--orange-mid);
+}
+
+.index-chart { display: flex; flex-direction: column; gap: 6px; }
+
+.index-chart-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.index-chart-head .index-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.rank-label { font-size: 12px; color: var(--ink-soft); }
+
+/* Fluid width: the panel's content box is exactly 336px only while no scrollbar is shown,
+   so a fixed-size SVG overflowed/jumped whenever a taller (projected-year) panel got one. */
+.index-chart svg { width: 100%; height: auto; display: block; }
+.index-chart .pt { cursor: crosshair; }
+.index-chart .pt-tip { opacity: 0; pointer-events: none; }
+.index-chart .pt:hover .pt-tip { opacity: 1; }
+.index-chart .pt:hover .pt-dot { r: 4; }
+
+.projection-note {
+  font-size: 11px;
+  font-style: italic;
+  color: var(--ink-soft);
+  letter-spacing: 0.01em;
+}
+
+.sources {
+  margin-top: auto;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.sources a { color: var(--blue); font-weight: 600; text-decoration: underline; }
+
+.unavailable-note {
+  font-size: 13px;
+  color: var(--ink-soft);
+  background: var(--paper);
+  border: 1px dashed var(--input-border);
+  border-radius: 8px;
+  padding: 10px 12px;
+}

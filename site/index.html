@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brecha Madrid</title>
+<meta name="description" content="Un mapa que compara la renta media con el precio de alquilar o comprar vivienda, barrio a barrio, en Madrid.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-name">Brecha</span>
+      <span class="brand-sub">Madrid · 21 distritos</span>
+    </div>
+    <nav class="topnav">
+      <a href="#mapa">Mapa</a>
+      <a href="metodologia.html">Metodología</a>
+    </nav>
+  </header>
+
+  <div class="layout">
+
+    <aside class="rail">
+      <div class="rail-intro">
+        <h1>Lo que ganas y lo que cuesta vivir donde vives</h1>
+        <p>Compara la renta media de cada distrito con el precio real del metro cuadrado, en alquiler y en compra.</p>
+      </div>
+
+      <div class="rail-section">
+        <div class="rail-label">Capa del mapa</div>
+        <div class="button-group cols-2" id="layer-buttons"></div>
+      </div>
+
+      <div class="rail-section" id="cross-section" hidden>
+        <div class="rail-label">Cruzar renta con</div>
+        <div class="button-group cols-2" id="cross-buttons"></div>
+      </div>
+
+      <div class="rail-section" id="price-source-section" hidden>
+        <div class="rail-label" id="price-source-label">Alquiler según</div>
+        <div class="button-group cols-2" id="price-source-buttons"></div>
+        <p class="rail-note" id="price-source-note"></p>
+      </div>
+
+      <div class="rail-section">
+        <div class="rail-label">Renta de referencia</div>
+        <div class="button-group cols-2" id="base-buttons"></div>
+        <p class="rail-note" id="base-note"></p>
+      </div>
+
+      <div class="rail-section">
+        <div class="rail-label">Cómo leer los colores</div>
+        <div id="legend-grid-wrap" class="legend-grid-wrap" hidden>
+          <div class="legend-axis-y"><span id="legend-axis-label"></span></div>
+          <div class="legend-grid-col">
+            <div class="legend-grid" id="legend-grid"></div>
+            <div class="legend-axis-x">Renta neta →</div>
+          </div>
+        </div>
+        <div id="legend-strip-wrap" class="legend-strip-wrap" hidden>
+          <div class="legend-strip" id="legend-strip"></div>
+          <div class="legend-strip-labels">
+            <span id="strip-left"></span>
+            <span id="strip-right"></span>
+          </div>
+        </div>
+        <p class="rail-note" id="legend-note"></p>
+      </div>
+    </aside>
+
+    <main class="map-wrap" id="mapa">
+      <svg id="map" role="img" aria-label="Mapa de Madrid"></svg>
+      <div id="tooltip" hidden></div>
+
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Código postal, p. ej. 28038" aria-label="Buscar por código postal">
+        <button type="button" id="search-btn">Buscar</button>
+        <div id="search-results" class="search-results" hidden></div>
+      </div>
+
+      <nav class="map-breadcrumb" aria-label="Navegación de nivel">
+        <button id="crumb-madrid" class="crumb" type="button">Madrid</button>
+        <span id="crumb-district-wrap" hidden> <span class="crumb-sep">›</span> <button id="crumb-district" class="crumb" type="button"></button></span>
+      </nav>
+
+      <div class="map-hint" id="map-hint"></div>
+
+      <div class="timeline-bar">
+        <button type="button" id="play-btn" class="play-btn" aria-label="Reproducir años">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="#F5F1E8" id="play-icon"><path d="M4 2.5v11l9-5.5z"></path></svg>
+        </button>
+        <div class="year-slider-col">
+          <input type="range" id="year-slider" min="2015" max="2025" step="1" value="2023" aria-label="Año">
+          <div class="year-ticks" id="year-ticks"></div>
+          <div class="year-proj-note" id="year-proj-note"></div>
+        </div>
+        <div class="year-readout" id="year-readout">2023</div>
+        <button type="button" id="compare-btn" class="toggle-btn">Comparar con 2015</button>
+      </div>
+    </main>
+
+    <aside class="panel">
+      <div class="panel-content" id="panel-content">
+        <p class="placeholder-text">Haz clic en un distrito para empezar.</p>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

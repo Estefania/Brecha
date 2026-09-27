@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metodología — Brecha Madrid</title>
+<meta name="description" content="Fuentes de datos, cómo se calculan las cifras por barrio y distrito, y las limitaciones conocidas de Brecha Madrid.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/article.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-name">Brecha</span>
+    <span class="brand-sub">Madrid · 21 distritos</span>
+  </div>
+  <nav class="topnav">
+    <a href="index.html">Mapa</a>
+    <a href="metodologia.html">Metodología</a>
+  </nav>
+</header>
+
+<main class="article">
+  <h1>Metodología y fuentes</h1>
+  <p class="lede">Brecha Madrid compara la renta neta media de cada distrito o barrio con el precio real
+  del alquiler y de la compra de vivienda. Esta página explica de dónde salen los datos, cómo se
+  calculan las cifras y, sobre todo, qué limitaciones tienen — para que puedas juzgar tú mismo cuánto
+  fiarte de cada número.</p>
+
+  <h2 id="sesgo-renta">El sesgo más importante: la renta va por detrás</h2>
+  <p>Este es el aviso que más importa de toda esta página. La renta neta (INE) se publica con un
+  desfase de unos 22 meses: el último dato disponible es de <strong>2023</strong>, publicado en
+  octubre de 2025. El alquiler (SERPAVI) llega hasta <strong>2024</strong>, y el precio de compra hasta
+  <strong>2025</strong> (dato real del registro, tanto por distrito como por barrio).</p>
+  <p>Esto significa que, en cualquier comparación, es fácil que estés viendo el precio de un año más
+  reciente que la renta con la que se compara. Si los alquileres o los precios de compra han subido
+  con fuerza entre el último año de renta disponible y hoy — como ha ocurrido en Madrid en los últimos
+  años — <strong>el esfuerzo real de vivienda hoy es probablemente mayor</strong> que el que muestra
+  este sitio, porque la renta de referencia es más vieja que el precio. No hemos encontrado ninguna
+  fuente pública más reciente para la renta neta por sección censal u hogar; si aparece una, actualizaremos
+  esta cifra (ver <a href="#actualizacion">Actualización</a>).</p>
+
+  <h2 id="proyecciones">Años proyectados (marcados con *)</h2>
+  <p>El control de año del mapa llega hasta <strong>2025</strong>, el último año con precio de compra.
+  Para esos años la renta (real hasta 2023) y el alquiler (real hasta 2024) <strong>todavía no están
+  publicados</strong>, así que el mapa los <strong>proyecta</strong>: para cada distrito o barrio se toma
+  su crecimiento anual medio de los últimos tres intervalos con dato real y se aplica hacia delante. Es
+  una extrapolación de tendencia, no una previsión: no anticipa cambios bruscos. Todo lo que se apoya en
+  un valor proyectado — el color del mapa, las cifras del panel y los esfuerzos calculados con ellos —
+  lleva un asterisco (<strong>*</strong>) y una nota. El precio de compra nunca se proyecta, y una serie
+  con huecos no se rellena. El año que se muestra al abrir el mapa (2023) usa solo datos reales.</p>
+
+  <h2 id="esfuerzo">La capa por defecto: Esfuerzo</h2>
+  <p>Al abrir el mapa, el color de cada distrito o barrio no es la renta ni el precio por separado, sino
+  el <strong>esfuerzo</strong>: alquilar 60 m² o comprar 80 m² como porcentaje de la renta neta anual (años
+  de renta, en el caso de comprar). Es la forma más directa de comparar zonas: cuanto más oscuro el
+  naranja, mayor el esfuerzo frente a la renta de esa zona. El cálculo usa el mismo alquiler o precio de
+  compra que tengas elegido en los interruptores «Contratos en vigor / Precio de oferta» y «Total / Obra
+  nueva / Segunda mano».</p>
+  <p>A diferencia de las demás capas (Renta, Alquiler, Compra, Cruce), que reparten los 131 barrios o 21
+  distritos en tres grupos iguales — bajo, medio, alto — recalculados cada año, Esfuerzo usa
+  <strong>umbrales fijos</strong>: menos del 15 %, 15–20 %, 20–25 %, 25–30 % y más del 30 % de la renta
+  anual para alquilar; menos de 4, 4–6, 6–8, 8–10 y más de 10 años de renta para comprar. El 30 % es la
+  referencia habitual de «carga excesiva» de vivienda. Al ser fijos, el mismo color significa lo mismo en
+  cualquier año, así que el mapa puede mostrar que el esfuerzo ha subido en general — algo que un reparto
+  en tercios, recalculado cada año, nunca puede mostrar. Con la opción «Persona» (renta por persona en vez
+  de por hogar) los umbrales son distintos y más altos (35–65 % y 10–20 años), porque un hogar medio tiene
+  unas 2,6 personas y, si no, casi todo el mapa saldría del mismo color oscuro.</p>
+
+  <h2>Fuentes de datos</h2>
+  <table>
+    <thead><tr><th>Necesitamos</th><th>Fuente</th><th>Nivel</th><th>Años</th></tr></thead>
+    <tbody>
+      <tr><td>Renta</td><td>INE, Atlas de Distribución de Renta de los Hogares</td><td>secciones censales</td><td>2015–2023</td></tr>
+      <tr><td>Alquiler (contratos en vigor)</td><td>MIVAU, SERPAVI (fuente tributaria, Modelo 100)</td><td>secciones censales</td><td>2011–2024</td></tr>
+      <tr><td>Alquiler (precio de oferta, anuncios de nuevos contratos)</td><td>Idealista, publicado por el Ayuntamiento de Madrid (Banco de Datos); media anual de los meses, descartando dos errores evidentes de la fuente</td><td>distrito</td><td>2011–2024 (el mapa usa 2015–2024)</td></tr>
+      <tr><td>Compra: total, obra nueva y segunda mano (distrito)</td><td>Ayuntamiento de Madrid, Estadística Registral Inmobiliaria (Colegio de Registradores)</td><td>distrito</td><td>2007–2025 (el mapa usa 2015–2025)</td></tr>
+      <tr><td>Compra: total, obra nueva y segunda mano (barrio)</td><td>Ayuntamiento de Madrid, Estadística Registral Inmobiliaria (Colegio de Registradores)</td><td>barrio</td><td>2016–2025</td></tr>
+      <tr><td>Hogares (para ponderar)</td><td>Ayuntamiento de Madrid, Padrón Municipal</td><td>secciones censales</td><td>2015–2024</td></tr>
+      <tr><td>Límites administrativos</td><td>Geoportal del Ayuntamiento de Madrid</td><td>distrito, barrio, sección</td><td>vigente</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Cómo se calculan las cifras de barrio y distrito</h2>
+  <p>El INE y el Ayuntamiento no publican renta ni alquiler oficiales por barrio — el nivel oficial más
+  fino es la sección censal (2.462 en Madrid). Las cifras de barrio y distrito que ves aquí son
+  <strong>elaboración propia</strong>: se calculan sumando las secciones censales que caen dentro de
+  cada barrio o distrito, <strong>ponderadas por número de hogares</strong> de cada sección. Una sección
+  sin datos suficientes (por ejemplo, menos de 10 alquileres registrados ese año) se excluye del
+  cálculo — nunca se inventa un valor para rellenarla.</p>
+  <p>Cada barrio y año lleva asociada una <em>cobertura de hogares</em>: el porcentaje de hogares del
+  barrio que están en secciones con dato real ese año. Cuando esa cobertura es baja, el número
+  mostrado se apoya en menos secciones de las ideales — lo normal en barrios periféricos o de baja
+  densidad — y conviene tomarlo con más cautela.</p>
+
+  <h2>Otras limitaciones conocidas</h2>
+  <ul>
+    <li><strong>El precio de compra por barrio omite algunos años y barrios por confidencialidad
+    estadística</strong>: el Colegio de Registradores solo publica el dato de un barrio y año cuando
+    hay al menos 15 transacciones — igual que el umbral de SERPAVI para el alquiler. En la práctica
+    esto deja en blanco entre 1 y 9 barrios de 131 en cualquier año dado para el precio total, pero
+    la <strong>obra nueva</strong> es mucho más escasa: solo entre 55 y 69 barrios tienen dato cada año
+    (y algunos barrios, como la mayoría de los de Retiro, casi nunca). En 2015 el registro no publica
+    ningún barrio, así que no hay precio de compra por barrio ese año.</li>
+    <li><strong>Los precios de compra de un barrio suben y bajan más de lo que sube y baja el mercado.</strong>
+    Cada dato es el precio medio declarado de las compraventas de ese barrio y año — a veces solo 15 —
+    y cambia con el tipo de vivienda que se vendió. Que un barrio baje un año no significa que el mercado
+    bajara allí; es más fiable mirar la tendencia de varios años y los distritos. 2023 fue además un año
+    casi plano en toda la ciudad (mediana de barrios +4%, tras +8% en 2022 y antes de +9% en 2024), así
+    que en muchos barrios el dato de 2023 queda por debajo del de 2022. Es coherente con el Índice de
+    Precios de Vivienda del INE para la Comunidad de Madrid (+6,8% en 2022, +3,9% en 2023, +7,7% en
+    2024; correlación de 0,95 con nuestra serie de la ciudad entre 2017 y 2025), aunque nuestra serie
+    sube algo más que el índice del INE en el acumulado (mide el precio medio declarado por m², sin
+    corregir por el tipo de vivienda vendida, y es de la ciudad, no de toda la región). La obra nueva
+    es la serie más irregular.</li>
+    <li><strong>Los precios de compra de distrito son oficiales; los de barrio también, pero más
+    escasos.</strong> El Ayuntamiento publica, con datos del Colegio de Registradores, el precio medio
+    declarado de cada distrito (2007–2025, sin huecos) y de cada barrio (solo desde 2016). Antes de
+    2015 el mapa no puede mostrar el esfuerzo porque no hay renta del INE, aunque el precio de distrito
+    sí existe desde 2007. La capa «Compra» del mapa deja elegir entre el precio total, solo obra nueva o
+    solo segunda mano; la tarjeta «Comprar» del panel, en cambio, siempre usa el precio medio de
+    <em>todas</em> las compraventas.</li>
+    <li><strong>El alquiler que se muestra es el de los contratos en vigor, no el de un anuncio
+    nuevo.</strong> SERPAVI se calcula con lo que los propietarios declaran a Hacienda: incluye
+    contratos antiguos (que suben despacio) y solo alquileres declarados. Por eso queda por debajo de los
+    precios de oferta y sube más despacio: comparado con los anuncios de Idealista que recoge el
+    Ayuntamiento, en 2024 el alquiler SERPAVI de un distrito medio es un 20% más bajo, y entre 2015 y
+    2024 sube un +41% frente a un +67% de los anuncios. La estructura entre distritos coincide (correlación
+    de 0,94–0,99 entre distritos), pero <strong>quien busca piso hoy paga más de lo que muestra el
+    mapa</strong>, y el esfuerzo de «Alquilar» está, por tanto, infravalorado para un inquilino nuevo. Por
+    eso, a nivel de <em>distrito</em>, tanto el mapa (en cualquier capa que use el alquiler) como el panel
+    dejan elegir entre «Contratos en vigor» y «Precio de oferta» — no es solo una fila extra del panel.
+    Por barrio solo existe el dato de contratos en vigor: si tenías «Precio de oferta» seleccionado y
+    entras en un barrio, el mapa vuelve a «Contratos en vigor» automáticamente (con un aviso) y recupera tu
+    elección al volver a la vista de distrito.</li>
+    <li><strong>Los alquileres en blanco lo están a propósito</strong>: cuando una sección censal tiene
+    menos de 10 contratos de alquiler registrados ese año, SERPAVI no publica el dato por motivos de
+    confidencialidad estadística. No se rellena ni se estima.</li>
+    <li><strong>Un pequeño porcentaje de secciones censales (1–3%) no encaja perfectamente</strong>
+    entre las fuentes de renta/alquiler y el mapa de límites administrativos actual, porque el INE y
+    SERPAVI renumeran secciones de vez en cuando y el mapa usa la versión vigente hoy.</li>
+    <li><strong>La búsqueda por código postal es aproximada.</strong> Los códigos postales de Madrid no
+    coinciden con los límites de los barrios — más del 90% de los códigos postales de la ciudad abarcan
+    más de un barrio. Por eso la búsqueda muestra varios barrios candidatos con su peso, en vez de
+    saltar directamente a uno.</li>
+  </ul>
+
+  <h2 id="actualizacion">Actualización</h2>
+  <p>Los datos se han revisado por última vez en septiembre de 2026. No hay todavía una actualización
+  automática mensual configurada (está en el plan, ver el repositorio del proyecto).</p>
+
+  <p class="back"><a href="index.html">← Volver al mapa</a></p>
+</main>
+</body>
+</html>

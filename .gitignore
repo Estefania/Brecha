@@ -1,0 +1,30 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Data. None of it is redistributed through this repo, including the derived
+# JSON the site reads - only INE/SERPAVI/Ayuntamiento CC BY-style sources are
+# clearly free to redistribute, but several others (Colegio de Registradores
+# purchase prices, Idealista asking rent) are not, and the derived files mix
+# sources together. Cloning this repo gets you the code only; run the
+# pipeline (see README.md) to build your own copy of the data, including
+# manually re-fetching a few small source files per the docstrings in
+# pipeline/05_purchase.py and pipeline/09_rent_asking.py.
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/site/*
+!data/site/.gitkeep
+
+# Design mockups / reference material - not part of the published project.
+design/
+
+# Private project-handoff notes and data-licensing review - not for the public repo.
+CLAUDE.md
+DATA_SOURCES.md
+
+# Dev-only test harness and its dependency file - kept locally, not published.
+tests/
+requirements-dev.txt
